@@ -12,7 +12,7 @@ import FirebaseDatabase
 import SVProgressHUD
 
 class PostViewController: UIViewController {
-    var image = UIImage!
+    var image: UIImage!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!

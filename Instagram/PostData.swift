@@ -39,6 +39,7 @@ class PostData: NSObject {
             self.likes = likes
         }
         
+        //likesのキー配列中に、myIdとself.likesキーと一致しているか調べ、一致していたらisLikkedをtrueにする
         for likeId in self.likes {
             if likeId == myId {
                 self.isLinked = true

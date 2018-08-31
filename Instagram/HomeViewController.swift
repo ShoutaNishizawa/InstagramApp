@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.allowsSelection = false
         
         let nib = UINib(nibName: "PostTableViewCell", bundle: nil)
-        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "Cell")
+        tableView.register(nib, forCellReuseIdentifier: "Cell")
         
         //テーブルの行の高さをAutoLayoutで自動調整する
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -131,7 +131,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     //セル内のボタンがタップされたときに呼ばれるメソッド
-    @objc func handleButton(_sender: UIButton, forEvent event: UIEvent) {
+    @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
         print("DEBUG_PRINT: likeボタンがタップされました。")
         
         //タップされたセルのインデックスを求める
