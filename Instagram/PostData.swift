@@ -18,7 +18,8 @@ class PostData: NSObject {
     var caption: String?
     var date: Date?
     var likes: [String] = []
-    var isLinked: Bool = false
+    var isLiked: Bool = false
+    var comment: [String] = []  //追加
     
     init(snapshot: DataSnapshot, myId: String) {
         self.id = snapshot.key
@@ -39,10 +40,15 @@ class PostData: NSObject {
             self.likes = likes
         }
         
+        //追加
+        if let comment = valueDictionary["comment"] as? [String] {
+            self.comment = comment
+        }
+        
         //likesのキー配列中に、myIdとself.likesキーと一致しているか調べ、一致していたらisLikkedをtrueにする
         for likeId in self.likes {
             if likeId == myId {
-                self.isLinked = true
+                self.isLiked = true
                 break
             }
         }
