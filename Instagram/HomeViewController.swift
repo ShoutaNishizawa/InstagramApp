@@ -12,17 +12,17 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var postArray: [PostData] = []
     
     // DatabaseのobserveEventの登録状態を表す
     var observing = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -39,7 +39,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.estimatedRowHeight = UIScreen.main.bounds.width + 100
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -141,7 +141,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let point = touch!.location(in: self.tableView)
         let indexPath = tableView.indexPathForRow(at: point)
         
-
+        
         //コメント画面をモーダル表示
         let commentViewController = self.storyboard?.instantiateViewController(withIdentifier: "Comment") as! CommentViewController
         self.present(commentViewController, animated: true, completion: nil)
@@ -152,7 +152,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-
+    
     //セル内のlikeボタンがタップされたときに呼ばれるメソッド
     @objc func handleLikeButton(_ sender: UIButton, forEvent event: UIEvent) {
         print("DEBUG_PRINT: likeボタンがタップされました。")
@@ -193,13 +193,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

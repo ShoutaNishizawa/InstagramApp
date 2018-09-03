@@ -59,9 +59,10 @@ class PostTableViewCell: UITableViewCell {
         }
         
         //コメント用のnameとコメント内容を表示
-        let commentArray = zip(postData.commentName, postData.comment).map {($0, $1)}
-        
-        self.displayComment.text = "\(commentArray)"
-        print("\(commentArray)")
+        var text = ""
+        for i in 0..<postData.commentName.count {
+            text += "\(postData.commentName[i]) : \(postData.comment[i]) \n \n" //次のコメントとの区別がつくように2回改行する
+        }
+        self.displayComment.text = text
     }
 }

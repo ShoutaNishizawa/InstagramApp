@@ -24,7 +24,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func postCommentButton(_ sender: Any) {
         
-
+        
         if let userName = Auth.auth().currentUser?.displayName {
             postData?.commentName.append(userName)
             postData?.comment.append(self.commentTextView.text!)
