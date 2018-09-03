@@ -23,10 +23,10 @@ class PostTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -59,9 +59,9 @@ class PostTableViewCell: UITableViewCell {
         }
         
         //コメント用のnameとコメント内容を表示
-
-        self.displayComment.text = "\(postData.name!)"
-
+        let commentArray = zip(postData.commentName, postData.comment).map {($0, $1)}
+        
+        self.displayComment.text = "\(commentArray)"
+        print("\(commentArray)")
     }
-    
 }

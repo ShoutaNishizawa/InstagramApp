@@ -67,7 +67,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 })
                 
                 //要素が変更されたら該当データをpostArrayから一度削除した後に新しいデータを追加してTableViewを再表示する
-                postRef.observe(.childAdded, with: { snapshot in
+                postRef.observe(.childChanged, with: { snapshot in
                     print("DEBUG_PRINT: .childChangedイベントが発生しました")
                     
                     if let uid = Auth.auth().currentUser?.uid {
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.present(commentViewController, animated: true, completion: nil)
         
         //配列からタップされたインデックスのデータを遷移先の配列に渡す
-        commentViewController.commentData = postArray[indexPath!.row]
+        commentViewController.postData = postArray[indexPath!.row]
         
         
     }

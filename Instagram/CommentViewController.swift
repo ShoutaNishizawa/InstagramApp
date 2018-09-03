@@ -20,22 +20,31 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let SCREEN_SIZE = UIScreen.main.bounds.size
     
-    var commentData: PostData?
+    var postData: PostData?
     
     @IBAction func postCommentButton(_ sender: Any) {
         
-        //辞書を作成してFirebaseに保存する
-        let postRef = Database.database().reference().child(Const.PostPath).child(commentData!.id!)
-        let commentDic = ["comment": commentTextView.text!]
-        postRef.updateChildValues(commentDic)
-        
-        //HUDで投稿完了を表示する
-        SVProgressHUD.showSuccess(withStatus: "コメントを投稿しました")
-        
-        print("DEBUG_PRINT: コメント投稿完了")
-        
-        //全てのモーダルを閉じる
-        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+
+        if let userName = Auth.auth().currentUser?.displayName {
+            postData?.commentName.append(userName)
+            postData?.comment.append(self.commentTextView.text!)
+            
+            print("DEBUG_PRINT:" ,postData!.comment, postData!.commentName)
+            
+            //辞書を作成してFirebaseに保存する
+            let postRef = Database.database().reference().child(Const.PostPath).child(postData!.id!)
+            
+            let commentDic = [ "commentName": postData?.commentName, "comment": postData?.comment]
+            postRef.updateChildValues(commentDic)
+            
+            //HUDで投稿完了を表示する
+            SVProgressHUD.showSuccess(withStatus: "コメントを投稿しました")
+            
+            print("DEBUG_PRINT: コメント投稿完了")
+            
+            //全てのモーダルを閉じる
+            UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -129,7 +138,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         //セルを取得してデータを設定する
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         
-        cell.setPostData(commentData!)
+        cell.setPostData(postData!)
         
         return cell
         
